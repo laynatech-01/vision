@@ -162,21 +162,21 @@ if (Recognition) {
         const cmd = e.results[e.results.length - 1][0].transcript.toLowerCase();
         if (cmd.includes("activar sistema")) iniciarSistema();
         if (cmd.includes("desactivar sistema")) detenerSistema();
-        if (cmd.includes("describir")) activarDescripcion();
-        if (cmd.includes("no describir")) desactivarDescripcion();
+        if (cmd.includes("activar describir")) activarDescripcion();
+        if (cmd.includes("desactivar describir")) desactivarDescripcion();
     };
     recognition.start();
 }
 
 async function iniciarSistema() {
-    const pin = prompt("LaynaTech Vision 1.0 - Ingrese PIN:");
+    const pin = prompt("LaynaTech Visión 1.0 - Ingrese PIN:");
     if (pin === "9632") {
         localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
         video.srcObject = localStream;
         video.play();
         streaming = true;
         startButton.disabled = true; stopButton.disabled = false;
-        hablar("soy el sistema de vision por computadora creado por LaynaTech, pensado como una herramienta de apoyo para personas ciegas", true);
+        hablar("Hola, soy el sistema de vision por computadora creado por LaynaTech, pensado como una herramienta de apoyo visual para personas ciegas, esta herramienta no permite realizar actividades que representen un riesgo para el usuario, requiere siempre asistencia humana, esta herramienta es responsabilidad de quien la usa, la empresa se deslinda de cualquier responsabilidad, consultar terminos legales.", true);
         video.onloadedmetadata = () => { canvas.width = video.videoWidth; canvas.height = video.videoHeight; predict(); };
     } else {
         alert("PIN incorrecto");
